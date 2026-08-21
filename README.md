@@ -69,4 +69,6 @@ green landscapes, peaceful backwaters, rich culture, and diverse
 traditions. It is often called "God's Own Country" and is a popular
 destination for travelers from around the world.
 
+```text
 Write a paragraph? Y for yes, anything else for no.
+```
