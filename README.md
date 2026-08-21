@@ -59,8 +59,10 @@ What should this paragraph talk about? Kerala
 ```
 
 ## Example Output
+```text
 Write a paragraph? Y for yes, anything else for no. Y
 What should this paragraph talk about? Kerala
+```
 
 Kerala is a beautiful state in southern India, known for its lush
 green landscapes, peaceful backwaters, rich culture, and diverse
