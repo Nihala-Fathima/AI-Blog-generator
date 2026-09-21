@@ -1,13 +1,18 @@
 from google import genai
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY")
+client = genai.Client(
+    api_key=os.getenv("GEMINI_API_KEY")
 )
 
-def generate_blog(topic, audience,tone,word_count,keywords):
-    prompt = f"""You are an expert blog writer.
+
+def generate_blog(topic, audience, tone, word_count, keywords):
+
+    prompt = f"""
+You are an expert blog writer.
 
 Create a high quality blog article using the following requirements:
 
@@ -33,57 +38,15 @@ Requirements:
 - Use Markdown headings.
 """
 
-    
     response = client.models.generate_content(
-        model="gemini-3.7-flash",
-    contents=prompt)
+        model="gemini-3.5-flash-lite",
+        contents=prompt
+    )
+
     return response.text
-    
-def get_user_input():
-    print("\n========== AI BLOG GENERATOR ===========\n")
-    topic = input("What is the topic?")
-
-    audience = input("Who is the target audience?")
-    tone = input("What tone should the blog have? "
-        "(Professional / Friendly / Academic / Casual):")
-
-    word_count = input("Approximate word count (e.g. 500, 1000, 1500): ")
-
-    keywords = input("Enter keywords separated by commas:")
-
-    return topic, audience, tone, word_count, keywords
 
 
-def main():
-   while True:
+print("\nAvailable Gemini models:\n")
 
-      answer = input("\nDo you want to generate a blog? "
-            "Y for yes, anything else to exit: ")
-
-      if answer.upper() != 'Y':
-          print("Goodbye!")
-          break
-
-
-      topic, audience, tone, word_count, keywords = get_user_input()
-
-      print("\nGenerating your blog...\n")
-
-      try:
-            blog = generate_blog(
-                topic,
-                audience,
-                tone,
-                word_count,
-                keywords
-            )
-
-            print("\n========== GENERATED BLOG ==========\n")
-            print(blog)
-
-      except Exception as e:
-            print(f"\nError: {e}")
-
-
-if __name__ == "__main__":
-    main()
+for model in client.models.list():
+    print(model.name)
